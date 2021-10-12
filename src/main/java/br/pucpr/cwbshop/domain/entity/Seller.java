@@ -1,5 +1,6 @@
 package br.pucpr.cwbshop.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -17,6 +18,11 @@ public class Seller implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "seller")
     @JsonManagedReference
     private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Product product;
 
     @Column(name = "seller_id", length = 50)
     private String seller_id;
@@ -76,5 +82,13 @@ public class Seller implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

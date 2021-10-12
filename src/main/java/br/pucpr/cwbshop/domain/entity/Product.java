@@ -24,6 +24,10 @@ public class Product implements Serializable {
     @JsonManagedReference
     private Promotion promotion;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonManagedReference
+    private Seller seller;
+
     @Column(length = 50)
     private String site_id;
 
@@ -152,5 +156,13 @@ public class Product implements Serializable {
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 }

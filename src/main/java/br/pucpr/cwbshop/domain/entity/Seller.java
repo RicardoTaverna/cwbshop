@@ -1,6 +1,7 @@
 package br.pucpr.cwbshop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,10 @@ public class Seller implements Serializable {
     @Id
     @GeneratedValue
     private int id;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "seller")
+    @JsonManagedReference
+    private Address address;
 
     @Column(name = "seller_id", length = 50)
     private String seller_id;
@@ -63,5 +68,13 @@ public class Seller implements Serializable {
 
     public void setSeller_contact(String seller_contact) {
         this.seller_contact = seller_contact;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

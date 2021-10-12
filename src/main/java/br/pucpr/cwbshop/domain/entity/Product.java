@@ -1,18 +1,28 @@
 package br.pucpr.cwbshop.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product implements Serializable {
 
     @Id
     @GeneratedValue
     private int id;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("product")
+    private List<Attribute> attributeList;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonManagedReference
+    private Promotion promotion;
 
     @Column(length = 50)
     private String site_id;
@@ -46,6 +56,14 @@ public class Product implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Attribute> getAttributeList() {
+        return attributeList;
+    }
+
+    public void setAttributeList(List<Attribute> attributeList) {
+        this.attributeList = attributeList;
     }
 
     public String getSite_id() {
@@ -126,5 +144,13 @@ public class Product implements Serializable {
 
     public void setPermalink(String permalink) {
         this.permalink = permalink;
+    }
+
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
 }

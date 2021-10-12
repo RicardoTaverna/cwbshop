@@ -42,15 +42,4 @@ public class AttributeResource {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public Attribute update(@RequestBody Attribute new_attribute, @PathVariable("id") int id){
-        return attributeRepository.findById(id).map(attribute -> {
-            attribute.setAttribute_id(new_attribute.getAttribute_id());
-            attribute.setValue_name(new_attribute.getValue_name());
-            return attributeService.save(attribute);
-        }).orElseGet(() -> {
-            new_attribute.setId(id);
-            return attributeService.save(new_attribute);
-        });
-    }
 }

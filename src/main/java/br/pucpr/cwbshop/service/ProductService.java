@@ -2,6 +2,7 @@ package br.pucpr.cwbshop.service;
 
 import br.pucpr.cwbshop.domain.entity.Product;
 import br.pucpr.cwbshop.domain.entity.Promotion;
+import br.pucpr.cwbshop.domain.entity.Seller;
 import br.pucpr.cwbshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,10 @@ public class ProductService {
 
         Promotion promotion = product.getPromotion();
         promotion.setProduct(product);
+
+        Seller seller = product.getSeller();
+        seller.setProduct(product);
+
         return productRepository.save(product);
 
     }

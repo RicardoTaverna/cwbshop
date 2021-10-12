@@ -1,5 +1,6 @@
 package br.pucpr.cwbshop.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -12,6 +13,11 @@ public class City implements Serializable {
     @Id
     @GeneratedValue
     private int city_id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Address address;
 
     @Column(name = "id", length = 50)
     private String id;
@@ -41,5 +47,13 @@ public class City implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

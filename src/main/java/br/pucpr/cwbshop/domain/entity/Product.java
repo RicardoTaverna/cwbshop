@@ -62,12 +62,16 @@ public class Product implements Serializable {
     @Column(length = 100)
     private String permalink;
 
-    @OneToOne(cascade = CascadeType.MERGE, mappedBy = "product")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference
     @JoinColumn(name = "seller_address")
     private Address seller_address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.MERGE)
+    @Column(name = "seller_contact", length = 100)
+    private String seller_contact;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("product")
     private List<Attribute> attributes;
 
     public int getProduct_id() {
@@ -212,6 +216,14 @@ public class Product implements Serializable {
 
     public void setSeller_address(Address seller_address) {
         this.seller_address = seller_address;
+    }
+
+    public String getSeller_contact() {
+        return seller_contact;
+    }
+
+    public void setSeller_contact(String seller_contact) {
+        this.seller_contact = seller_contact;
     }
 
     public List<Attribute> getAttributes() {

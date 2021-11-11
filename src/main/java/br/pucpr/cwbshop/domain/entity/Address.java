@@ -14,7 +14,7 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int address_id;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
     @JsonManagedReference
@@ -28,17 +28,20 @@ public class Address implements Serializable {
     @JsonManagedReference
     private Country country;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @JsonBackReference
     private Product product;
 
-    public int getId() {
-        return id;
+    @Column(name = "id", length = 100)
+    private String id;
+
+    public int getAddress_id() {
+        return address_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAddress_id(int address_id) {
+        this.address_id = address_id;
     }
 
     public City getCity() {
@@ -71,5 +74,13 @@ public class Address implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

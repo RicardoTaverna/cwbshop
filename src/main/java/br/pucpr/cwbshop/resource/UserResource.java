@@ -40,7 +40,8 @@ public class UserResource {
     @DeleteMapping("/user")
     public ResponseEntity<String> delete(@Valid @RequestBody User user) {
         userService.delete(user);
-       return  ResponseEntity.ok().body("User excluded ID: " + user.getId());
+        return  ResponseEntity.ok().body("User excluded ID: " + user.getId());
+
     }
 
     @DeleteMapping("/user/{id}")
@@ -48,6 +49,4 @@ public class UserResource {
         userService.deleteById(id);
         return ResponseEntity.ok().body("User excluded ID: " + id);
     }
-
-
 }

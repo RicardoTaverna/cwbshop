@@ -15,7 +15,7 @@ public class Country implements Serializable {
     private int country_id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     @JsonBackReference
     private Address address;
 

@@ -33,7 +33,7 @@ public class ProductResource {
 
     @PostMapping()
     public Product add(@RequestBody Product product){
-        return productRepository.save(product);
+        return productService.save(product);
     }
 
     @DeleteMapping("/{id}")

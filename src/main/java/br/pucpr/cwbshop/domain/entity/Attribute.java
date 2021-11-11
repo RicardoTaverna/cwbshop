@@ -22,9 +22,9 @@ public class Attribute implements Serializable {
     @Column(name = "value_name", length = 100)
     private String value_name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("attributeList")
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JsonIgnoreProperties("attributes")
     private Product product;
 
     public int getAttribute_id() {

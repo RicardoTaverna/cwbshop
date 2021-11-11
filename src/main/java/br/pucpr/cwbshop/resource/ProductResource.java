@@ -50,14 +50,14 @@ public class ProductResource {
             product.setSubtitle(new_product.getSubtitle());
             product.setBase_price(new_product.getBase_price());
             product.setOriginal_price(new_product.getOriginal_price());
-            product.setCurrency(new_product.getCurrency());
+            product.setCurrency_id(new_product.getCurrency_id());
             product.setInitial_quantity(new_product.getInitial_quantity());
             product.setAvailable_quantity(new_product.getAvailable_quantity());
             product.setCondition(new_product.getCondition());
             product.setPermalink(new_product.getPermalink());
             return productService.save(product);
         }).orElseGet(() -> {
-            new_product.setId(id);
+            new_product.setProduct_id(id);
             return productService.save(new_product);
         });
     }

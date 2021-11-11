@@ -28,10 +28,10 @@ public class Address implements Serializable {
     @JsonManagedReference
     private Country country;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @JsonBackReference
-    private Seller seller;
+    private Product product;
 
     public int getId() {
         return id;
@@ -65,11 +65,11 @@ public class Address implements Serializable {
         this.country = country;
     }
 
-    public Seller getSeller() {
-        return seller;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

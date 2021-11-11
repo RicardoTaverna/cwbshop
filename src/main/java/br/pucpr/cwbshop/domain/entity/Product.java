@@ -14,39 +14,47 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int product_id;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("product")
-    private List<Attribute> attributeList;
+    @Column(name = "id", length = 100)
+    private String id;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonManagedReference
-    private Promotion promotion;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
-    @JsonManagedReference
-    private Seller seller;
-
-    @Column(length = 50)
+    @Column(name = "site_id", length = 100)
     private String site_id;
 
     @Column(length = 100)
     private String title;
 
+    @Column(name = "id_integracao")
+    private int id_integracao;
+
     @Column(length = 50)
     private String subtitle;
+
+    @Column(name = "seller_id", length = 50)
+    private String seller_id;
+
+    @Column(name = "price")
+    private Double price;
 
     private Double base_price;
 
     private Double original_price;
 
     @Column(length = 10)
-    private String currency;
+    private String currency_id;
 
+    @Column(name = "initial_quantity")
     private int initial_quantity;
 
+    @Column(name = "available_quantity")
     private int available_quantity;
+
+    @Column(name = "start_time")
+    private String start_time;
+
+    @Column(name = "stop_time")
+    private String stop_time;
 
     @Column(length = 50)
     private String condition;
@@ -54,20 +62,28 @@ public class Product implements Serializable {
     @Column(length = 100)
     private String permalink;
 
-    public int getId() {
+    @OneToOne(cascade = CascadeType.MERGE, mappedBy = "product")
+    @JsonManagedReference
+    @JoinColumn(name = "seller_address")
+    private Address seller_address;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.MERGE)
+    private List<Attribute> attributes;
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public List<Attribute> getAttributeList() {
-        return attributeList;
-    }
-
-    public void setAttributeList(List<Attribute> attributeList) {
-        this.attributeList = attributeList;
     }
 
     public String getSite_id() {
@@ -86,12 +102,36 @@ public class Product implements Serializable {
         this.title = title;
     }
 
+    public int getId_integracao() {
+        return id_integracao;
+    }
+
+    public void setId_integracao(int id_integracao) {
+        this.id_integracao = id_integracao;
+    }
+
     public String getSubtitle() {
         return subtitle;
     }
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    public String getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(String seller_id) {
+        this.seller_id = seller_id;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Double getBase_price() {
@@ -110,12 +150,12 @@ public class Product implements Serializable {
         this.original_price = original_price;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getCurrency_id() {
+        return currency_id;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrency_id(String currency_id) {
+        this.currency_id = currency_id;
     }
 
     public int getInitial_quantity() {
@@ -134,6 +174,22 @@ public class Product implements Serializable {
         this.available_quantity = available_quantity;
     }
 
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public String getStop_time() {
+        return stop_time;
+    }
+
+    public void setStop_time(String stop_time) {
+        this.stop_time = stop_time;
+    }
+
     public String getCondition() {
         return condition;
     }
@@ -150,19 +206,19 @@ public class Product implements Serializable {
         this.permalink = permalink;
     }
 
-    public Promotion getPromotion() {
-        return promotion;
+    public Address getSeller_address() {
+        return seller_address;
     }
 
-    public void setPromotion(Promotion promotion) {
-        this.promotion = promotion;
+    public void setSeller_address(Address seller_address) {
+        this.seller_address = seller_address;
     }
 
-    public Seller getSeller() {
-        return seller;
+    public List<Attribute> getAttributes() {
+        return attributes;
     }
 
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
     }
 }

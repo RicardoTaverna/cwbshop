@@ -56,7 +56,7 @@ public class Product implements Serializable {
     @Column(name = "stop_time")
     private String stop_time;
 
-    @Column(length = 50)
+    @Column(length = 50, name = "condicao")
     private String condition;
 
     @Column(length = 100)

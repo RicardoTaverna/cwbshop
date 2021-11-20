@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * The type User resource.
+ */
 @RestController
 @RequestMapping("/api")
 public class UserResource {
@@ -17,11 +20,22 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+    /**
+     * Gets users.
+     *
+     * @return the users
+     */
     @GetMapping("/user")
     public List<User> getUsers() {
         return userService.findAll();
     }
 
+    /**
+     * Save response entity.
+     *
+     * @param user the user
+     * @return the response entity
+     */
     @PostMapping("/user")
     public ResponseEntity<User>
     save(@Valid @RequestBody User user) {
@@ -30,6 +44,12 @@ public class UserResource {
     }
 
 
+    /**
+     * Update response entity.
+     *
+     * @param user the user
+     * @return the response entity
+     */
     @PutMapping("/user")
     public ResponseEntity update(@Valid @RequestBody User user) {
         userService.save(user);
@@ -37,6 +57,12 @@ public class UserResource {
     }
 
 
+    /**
+     * Delete response entity.
+     *
+     * @param user the user
+     * @return the response entity
+     */
     @DeleteMapping("/user")
     public ResponseEntity<String> delete(@Valid @RequestBody User user) {
         userService.delete(user);
@@ -44,6 +70,12 @@ public class UserResource {
 
     }
 
+    /**
+     * Delete by id response entity.
+     *
+     * @param id the id
+     * @return the response entity
+     */
     @DeleteMapping("/user/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         userService.deleteById(id);

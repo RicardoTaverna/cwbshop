@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ */
 @Service
 public class UserService implements CrudInterface<User> {
 

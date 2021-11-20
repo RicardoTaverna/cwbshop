@@ -9,11 +9,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type Product service.
+ */
 @Service
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    /**
+     * Save product.
+     *
+     * @param product the product
+     * @return the product
+     */
     public Product save(Product product){
         List<Attribute> attributes = product.getAttributes();
         System.out.println(attributes);

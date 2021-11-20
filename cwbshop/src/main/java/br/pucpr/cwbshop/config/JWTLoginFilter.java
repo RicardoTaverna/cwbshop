@@ -17,8 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * The type Jwt login filter.
+ */
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
+    /**
+     * Instantiates a new Jwt login filter.
+     *
+     * @param url         the url
+     * @param authManager the auth manager
+     */
     protected JWTLoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);

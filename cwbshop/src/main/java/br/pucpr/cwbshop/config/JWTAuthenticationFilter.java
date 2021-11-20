@@ -13,6 +13,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * The type Jwt authentication filter.
+ */
 public class JWTAuthenticationFilter extends GenericFilterBean {
 
     @Override

@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The type Attribute.
+ */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "attribute")
@@ -27,34 +30,74 @@ public class Attribute implements Serializable {
     @JsonIgnoreProperties("attributes")
     private Product product;
 
+    /**
+     * Gets attribute id.
+     *
+     * @return the attribute id
+     */
     public int getAttribute_id() {
         return attribute_id;
     }
 
+    /**
+     * Sets attribute id.
+     *
+     * @param attribute_id the attribute id
+     */
     public void setAttribute_id(int attribute_id) {
         this.attribute_id = attribute_id;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Gets value name.
+     *
+     * @return the value name
+     */
     public String getValue_name() {
         return value_name;
     }
 
+    /**
+     * Sets value name.
+     *
+     * @param value_name the value name
+     */
     public void setValue_name(String value_name) {
         this.value_name = value_name;
     }
 
+    /**
+     * Gets product.
+     *
+     * @return the product
+     */
     public Product getProduct() {
         return product;
     }
 
+    /**
+     * Sets product.
+     *
+     * @param product the product
+     */
     public void setProduct(Product product) {
         this.product = product;
     }

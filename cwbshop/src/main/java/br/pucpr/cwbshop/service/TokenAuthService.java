@@ -10,14 +10,35 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.Date;
 
+/**
+ * The type Token auth service.
+ */
 public class TokenAuthService {
 
-    // EXPIRATION_TIME = 10 dias
+    /**
+     * The constant EXPIRATION_TIME.
+     */
+// EXPIRATION_TIME = 10 dias
     static final long EXPIRATION_TIME = 860_000_000;
+    /**
+     * The Secret.
+     */
     static final String SECRET = "TOKEN_SECRETO";
+    /**
+     * The Token prefix.
+     */
     static final String TOKEN_PREFIX = "Bearer";
+    /**
+     * The Header string.
+     */
     static final String HEADER_STRING = "Authorization";
 
+    /**
+     * Add authentication.
+     *
+     * @param response the response
+     * @param username the username
+     */
     public static void addAuthentication(HttpServletResponse response, String username) {
         String JWT = Jwts.builder()
                 .setSubject(username)
@@ -28,6 +49,12 @@ public class TokenAuthService {
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }
 
+    /**
+     * Gets authentication.
+     *
+     * @param request the request
+     * @return the authentication
+     */
     public static Authentication getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
 

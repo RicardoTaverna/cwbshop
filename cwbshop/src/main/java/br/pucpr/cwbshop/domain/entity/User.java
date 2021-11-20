@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 
+/**
+ * The type User.
+ */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"dtCreation", "dtUpdate"},
@@ -41,61 +44,134 @@ public class User implements Serializable {
     @LastModifiedDate
     private Date dtUpdate;
 
+    /**
+     * Instantiates a new User.
+     */
     public User() {
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Gets login.
+     *
+     * @return the login
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * Sets login.
+     *
+     * @param login the login
+     */
     public void setLogin(String login) {
         this.login = login;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Gets first name.
+     *
+     * @return the first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Sets first name.
+     *
+     * @param firstName the first name
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Gets last name.
+     *
+     * @return the last name
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Sets last name.
+     *
+     * @param lastName the last name
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Gets dt creation.
+     *
+     * @return the dt creation
+     */
     public Date getDtCreation() {
         return dtCreation;
     }
 
+    /**
+     * Sets dt creation.
+     *
+     * @param dtCreation the dt creation
+     */
     public void setDtCreation(Date dtCreation) {
         this.dtCreation = dtCreation;
     }
 
+    /**
+     * Gets dt update.
+     *
+     * @return the dt update
+     */
     public Date getDtUpdate() {
         return dtUpdate;
     }
 
+    /**
+     * Sets dt update.
+     *
+     * @param dtUpdate the dt update
+     */
     public void setDtUpdate(Date dtUpdate) {
         this.dtUpdate = dtUpdate;
     }

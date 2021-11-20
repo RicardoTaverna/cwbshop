@@ -8,12 +8,27 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * The interface User repository.
+ */
 @Repository
 public interface UserRepository
         extends JpaRepository<User, Long> {
 
+    /**
+     * Find user by first name list.
+     *
+     * @param name the name
+     * @return the list
+     */
     List<User> findUserByFirstName(String name);
 
+    /**
+     * Find by name list.
+     *
+     * @param name the name
+     * @return the list
+     */
     @Query("select u from User u where u.firstName=:name")
     List<User> findByName(@Param("name") String name);
 

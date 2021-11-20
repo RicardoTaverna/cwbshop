@@ -8,11 +8,20 @@ import br.pucpr.cwbshop.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Address service.
+ */
 @Service
 public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
+    /**
+     * Save address.
+     *
+     * @param address the address
+     * @return the address
+     */
     public Address save(Address address){
         City city = address.getCity();
         city.setAddress(address);

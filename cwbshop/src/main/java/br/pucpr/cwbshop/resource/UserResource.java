@@ -43,7 +43,6 @@ public class UserResource {
         return ResponseEntity.ok(user);
     }
 
-
     /**
      * Update response entity.
      *

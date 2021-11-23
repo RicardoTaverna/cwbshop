@@ -8,15 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -145,108 +150,247 @@ class CwbshopApplicationTests {
     void get_user_test() throws Exception {
         mockMvc.perform(get("/api/user")
                 .header("Authorization", "Bearer " + bearerToken)
-                .accept("application/json;charset=UTF-8"))
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+//    @Test
+//    void delete_user_test() throws Exception {
+//        mockMvc.perform(delete("/api/user/1")
+//                .header("Authorization", "Bearer " + bearerToken)
+//                .accept("application/json;charset=UTF-8"))
+//                .andExpect(status().isOk());
+//    }
+
+    @Test
+    void get_attribute_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/attribute")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void get_attribute_by_id_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/attribute/{id}", 3)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
     void post_attribute_test() throws Exception {
-        mockMvc.perform(post("/attribute")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(attribute)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/attribute")
+                .content(objectMapper.writeValueAsString(attribute))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
+//    @Test
+//    void delete_attribute_by_id_test() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders
+//                .delete("/attribute/{id}", 2))
+//                .andExpect(status().isOk());
+//    }
+
     @Test
     void post_city_test() throws Exception {
-        mockMvc.perform(post("/city")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(city)))
-                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/city")
+                .content(objectMapper.writeValueAsString(city))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").exists());
     }
 
     @Test
     void get_city_test() throws Exception {
-        mockMvc.perform(get("/city")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(city)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/city")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
+    void get_city_by_id_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/city/4")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+//    @Test
+//    void delete_city_by_id_test() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders
+//                .delete("/city/{id}", 1))
+//                .andExpect(status().isAccepted());
+//    }
+
+    @Test
     void post_country_test() throws Exception {
-        mockMvc.perform(post("/country")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(country)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/country")
+                .content(objectMapper.writeValueAsString(country))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     void get_country_test() throws Exception {
-        mockMvc.perform(get("/country")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(country)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/country")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
+    void get_country_by_id_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/country/2")
+                .contentType("application/json"))
+                .andExpect(status().isOk());
+    }
+
+//    @Test
+//    void delete_country_by_id_test() throws Exception {
+//        mockMvc.perform(delete("/country/1")
+//                .contentType("application/json"))
+//                .andExpect(status().isOk());
+//    }
+
+    @Test
     void post_state_test() throws Exception {
-        mockMvc.perform(post("/state")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(state)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/state")
+                .content(objectMapper.writeValueAsString(state))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     void get_state_test() throws Exception {
-        mockMvc.perform(get("/state")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(state)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/state")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
+    void get_state_by_id_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/state/5")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+//    @Test
+//    void delete_state_by_id_test() throws Exception {
+//        mockMvc.perform(delete("/state/2")
+//                .contentType("application/json")
+//                .content(objectMapper.writeValueAsString(state)))
+//                .andExpect(status().isOk());
+//    }
+
+    @Test
     void post_address_test() throws Exception {
-        mockMvc.perform(post("/address")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(address)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/address")
+                .content(objectMapper.writeValueAsString(address))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     void get_address_test() throws Exception {
-        mockMvc.perform(get("/address")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(address)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/address")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
+    void get_address_by_id_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/address/4")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+//    @Test
+//    void delete_address_by_id_test() throws Exception {
+//        mockMvc.perform(delete("/address/2")
+//                .contentType("application/json")
+//                .content(objectMapper.writeValueAsString(address)))
+//                .andExpect(status().isOk());
+//    }
+
+    @Test
     void post_product_denied_test() throws Exception {
 
-        mockMvc.perform(post("/api/product")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(product)))
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/product")
+                .content(objectMapper.writeValueAsString(product))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
     }
 
     @Test
     void post_product_test() throws Exception {
 
-        mockMvc.perform(post("/api/product")
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/product")
                 .header("Authorization", "Bearer " + bearerToken)
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(product)))
+                .content(objectMapper.writeValueAsString(product))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     void get_product_test() throws Exception {
-        mockMvc.perform(get("/api/product")
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/product")
                 .header("Authorization", "Bearer " + bearerToken)
-                .accept("application/json;charset=UTF-8"))
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
+
+    @Test
+    void get_product_by_id_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/api/product/3")
+                .header("Authorization", "Bearer " + bearerToken)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+//    @Test
+//    void delete_product_by_id_test() throws Exception {
+//        mockMvc.perform(delete("/api/product/2")
+//                .header("Authorization", "Bearer " + bearerToken)
+//                .contentType("application/json")
+//                .content(objectMapper.writeValueAsString(product)))
+//                .andExpect(status().isOk());
+//    }
 
 
 }

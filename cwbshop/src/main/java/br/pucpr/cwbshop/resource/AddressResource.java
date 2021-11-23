@@ -3,6 +3,9 @@ package br.pucpr.cwbshop.resource;
 import br.pucpr.cwbshop.domain.entity.Address;
 import br.pucpr.cwbshop.repository.AddressRepository;
 import br.pucpr.cwbshop.service.AddressService;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -36,6 +36,7 @@ public class ProductResource {
      * @param id the id
      * @return the product by id
      */
+
     @GetMapping("/{id}")
     public Product get_product_by_id(@PathVariable("id") int id){
         return productRepository.getById(id);

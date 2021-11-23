@@ -3,6 +3,7 @@ package br.pucpr.cwbshop.domain.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -144,4 +144,152 @@ $ docker-compose up
     ```
 
 ## 🚧 Endpoints
-A documentação no padrão OpenAPI você encontra [aqui](/backend/docs/documentation.yml)
+
+### ⚙️OpenAPI
+A documentação no padrão OpenAPI você pode consultar [aqui](http://localhost:8060/swagger-ui.html)
+
+### 🧪 Payloads e Endpoints
+
+É possivel fazer download do arquivo para importar no insomnia <a href="Insomnia_cwbshop_collection.json" download>aqui</a>
+
+#### 🔓 Endpoints sem autenticação
+```json
+/attribute GET/POST/DELETE
+localhost:8060/attribute
+
+{
+  "attribute_id": "teste",
+  "value_name": "Marca del producto"
+}
+```
+```json
+/city GET/POST/DELETE
+localhost:8060/city
+        
+{
+  "id": "CWB",
+  "name": "Curitiba"
+}
+
+```
+
+```json
+/country GET/POST/DELETE
+localhost:8060/country
+
+{
+  "id": "BR",
+  "name": "Brasil"
+}
+```
+
+```json
+/state GET/POST/DELETE
+localhost:8060/state
+
+{
+  "id": "PR",
+  "name": "Paraná"
+}
+```
+
+```json
+/address GET/POST/DELETE
+localhost:8060/address
+
+{
+  "city": {
+    "id": "CWB",
+    "name": "Curitiba"
+  },
+  "state": {
+    "id": "PR",
+    "name": "Paraná"
+  },
+  "country":{
+    "id": "BR",
+    "name": "Brasil"
+  }
+}
+```
+
+#### 🔐 Endpoints com autenticação
+Primeiro passo realizar o login, e salvar o token que retorna no Header
+
+```json
+/login GET
+localhost:8060/login
+
+{
+  "username": "progweb",
+  "password": "progweb"
+}
+
+```
+Passar como Bearer token o codigo retornado atraves do endpoint /login
+
+```json
+/user GET/POST
+localhost:8060/api/user
+
+{
+  "login": "gnomo",
+  "password": "xambrolinha",
+  "firstName": "Gnomo",
+  "lastName": "Teste",
+  "dtCreation": "2021-11-11",
+  "dtUpdate": "2021-11-11"
+}
+```
+
+```json
+/api/product GET/POST/PUT/DELETE
+localhost:8060/api/product
+
+{
+  "id":"MLB1191972200",
+  "site_id":"MLB",
+  "title":"iPhone Xs  64gb",
+  "id_integracao": 123123,
+  "subtitle":null,
+  "seller_id":386261073,
+  "price":7299,
+  "base_price":7299,
+  "original_price":null,
+  "currency_id":"BRL",
+  "initial_quantity":5,
+  "available_quantity":2,
+  "start_time":"2019-03-11T20:12:44.000Z",
+  "stop_time":"2039-03-06T04:00:00.000Z",
+  "condition":"new",
+  "permalink":"URLASERDADA/NOMESERVICO/PRODUTO/IDANUNCIO",
+  "seller_address":{
+    "city":{
+      "id":"TUxCQ1NFUmI1ZGQx",
+      "name":"Serra"
+    },
+    "state":{
+      "id":"BR-ES",
+      "name":"Espírito Santo"
+    },
+    "country":{
+      "id":"BR",
+      "name":"Brasil"
+    },
+    "id":1017932319
+  },
+  "seller_contact":null,
+  "attributes":[
+    {
+      "id":"BRAND",
+      "value_name":"Marca del producto"
+    },
+    {
+      "id":"EAN",
+      "value_name":"7898095297749"
+    }
+  ]
+}
+```
+
+

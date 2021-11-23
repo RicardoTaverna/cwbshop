@@ -68,6 +68,28 @@ public class AttributeResource {
         return attributeService.save(attribute);
     }
 
+
+    /**
+     * Update attribute.
+     *
+     * @param new_attribute the new attribute
+     * @param id            the id
+     * @return the attribute
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza Attribute pelo ID")
+    public Attribute update(@RequestBody Attribute new_attribute, @PathVariable("id") int id){
+        return attributeRepository.findById(id).map(attribute -> {
+            attribute.setId(new_attribute.getId());
+            attribute.setValue_name(new_attribute.getValue_name());
+            attribute.setProduct(new_attribute.getProduct());
+            return attributeService.save(attribute);
+        }).orElseGet(() -> {
+            new_attribute.setAttributeId(id);
+            return attributeService.save(new_attribute);
+        });
+    }
+
     /**
      * Delete response entity.
      *

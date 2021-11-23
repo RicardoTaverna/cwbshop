@@ -66,6 +66,30 @@ public class AddressResource {
         return addressService.save(address);
     }
 
+
+    /**
+     * Update address.
+     *
+     * @param new_address the new address
+     * @param id          the id
+     * @return the address
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza Address pelo ID")
+    public Address update(@RequestBody Address new_address, @PathVariable("id") int id){
+        return addressRepository.findById(id).map(address -> {
+            address.setId(new_address.getId());
+            address.setState(new_address.getState());
+            address.setCountry(new_address.getCountry());
+            address.setCity(new_address.getCity());
+            address.setProduct(new_address.getProduct());
+            return addressService.save(address);
+        }).orElseGet(() -> {
+            new_address.setAddressId(id);
+            return addressService.save(new_address);
+        });
+    }
+
     /**
      * Delete response entity.
      *

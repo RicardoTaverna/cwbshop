@@ -68,6 +68,28 @@ public class CityResource {
     }
 
     /**
+     * Update city.
+     *
+     * @param new_city the new city
+     * @param id       the id
+     * @return the city
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza City pelo ID")
+    public City update(@RequestBody City new_city, @PathVariable("id") int id){
+        return cityRepository.findById(id).map(city -> {
+            city.setName(new_city.getName());
+            city.setId(new_city.getId());
+            city.setAddress(new_city.getAddress());
+            return cityService.save(city);
+        }).orElseGet(() -> {
+            new_city.setCityId(id);
+            return cityService.save(new_city);
+        });
+    }
+
+
+    /**
      * Delete response entity.
      *
      * @param id the id

@@ -15,10 +15,10 @@ import java.io.Serializable;
 public class State  implements Serializable {
     @Id
     @GeneratedValue
-    private int state_id;
+    private int stateId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     @JsonBackReference
     private Address address;
 
@@ -33,8 +33,8 @@ public class State  implements Serializable {
      *
      * @return the state id
      */
-    public int getState_id() {
-        return state_id;
+    public int getStateId() {
+        return stateId;
     }
 
     /**
@@ -42,8 +42,8 @@ public class State  implements Serializable {
      *
      * @param state_id the state id
      */
-    public void setState_id(int state_id) {
-        this.state_id = state_id;
+    public void setStateId(int state_id) {
+        this.stateId = state_id;
     }
 
     /**

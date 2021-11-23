@@ -1,6 +1,5 @@
 package br.pucpr.cwbshop.resource;
 
-import br.pucpr.cwbshop.domain.entity.Attribute;
 import br.pucpr.cwbshop.domain.entity.Product;
 import br.pucpr.cwbshop.repository.ProductRepository;
 import br.pucpr.cwbshop.service.ProductService;
@@ -96,7 +95,7 @@ public class ProductResource {
             product.setPermalink(new_product.getPermalink());
             return productService.save(product);
         }).orElseGet(() -> {
-            new_product.setProduct_id(id);
+            new_product.setProductId(id);
             return productService.save(new_product);
         });
     }

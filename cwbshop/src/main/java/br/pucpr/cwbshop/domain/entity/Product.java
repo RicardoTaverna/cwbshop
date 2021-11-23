@@ -18,7 +18,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue
-    private int product_id;
+    private int productId;
 
     @Column(name = "id", length = 100)
     private String id;
@@ -83,8 +83,8 @@ public class Product implements Serializable {
      *
      * @return the product id
      */
-    public int getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
     /**
@@ -92,8 +92,8 @@ public class Product implements Serializable {
      *
      * @param product_id the product id
      */
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int product_id) {
+        this.productId = product_id;
     }
 
     /**

@@ -1,7 +1,9 @@
 package br.pucpr.cwbshop;
 
 import br.pucpr.cwbshop.domain.entity.*;
+import br.pucpr.cwbshop.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -33,6 +34,27 @@ class CwbshopApplicationTests {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private AttributeRepository attributeRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private CountryRepository countryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private StateRepository stateRepository;
 
     private static Address address;
     private static Attribute attribute;
@@ -148,20 +170,24 @@ class CwbshopApplicationTests {
 
     @Test
     void get_user_test() throws Exception {
-        mockMvc.perform(get("/api/user")
+       mockMvc.perform(get("/api/user")
                 .header("Authorization", "Bearer " + bearerToken)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
+
     }
 
-//    @Test
-//    void delete_user_test() throws Exception {
-//        mockMvc.perform(delete("/api/user/1")
-//                .header("Authorization", "Bearer " + bearerToken)
-//                .accept("application/json;charset=UTF-8"))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void delete_user_test() throws Exception {
+
+        User lastUser = userRepository.findFirstByOrderById();
+
+        mockMvc.perform(delete("/api/user/{id}", lastUser.getId())
+                .header("Authorization", "Bearer " + bearerToken)
+                .accept("application/json;charset=UTF-8"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void get_attribute_test() throws Exception {
@@ -174,8 +200,10 @@ class CwbshopApplicationTests {
 
     @Test
     void get_attribute_by_id_test() throws Exception {
+        Attribute lastAttribute = attributeRepository.findFirstByOrderByAttributeId();
+
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/attribute/{id}", 3)
+                .get("/attribute/{id}", lastAttribute.getAttributeId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -191,12 +219,14 @@ class CwbshopApplicationTests {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    void delete_attribute_by_id_test() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .delete("/attribute/{id}", 2))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void delete_attribute_by_id_test() throws Exception {
+        Attribute lastAttribute = attributeRepository.findFirstByOrderByAttributeId();
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/attribute/{id}", lastAttribute.getAttributeId()))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void post_city_test() throws Exception {
@@ -220,19 +250,23 @@ class CwbshopApplicationTests {
 
     @Test
     void get_city_by_id_test() throws Exception {
+        City lastCity = cityRepository.findFirstByOrderByCityId();
+
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/city/4")
+                .get("/city/{id}", lastCity.getCityId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    void delete_city_by_id_test() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders
-//                .delete("/city/{id}", 1))
-//                .andExpect(status().isAccepted());
-//    }
+    @Test
+    void delete_city_by_id_test() throws Exception {
+        City lastCity = cityRepository.findFirstByOrderByCityId();
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/city/{id}", lastCity.getCityId()))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void post_country_test() throws Exception {
@@ -255,18 +289,23 @@ class CwbshopApplicationTests {
 
     @Test
     void get_country_by_id_test() throws Exception {
+        Country lastCountry = countryRepository.findFirstByOrderByCountryId();
+
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/country/2")
-                .contentType("application/json"))
+                .get("/country/{id}", lastCountry.getCountryId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    void delete_country_by_id_test() throws Exception {
-//        mockMvc.perform(delete("/country/1")
-//                .contentType("application/json"))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void delete_country_by_id_test() throws Exception {
+        Country lastCountry = countryRepository.findFirstByOrderByCountryId();
+
+        mockMvc.perform(delete("/country/{id}", lastCountry.getCountryId())
+                .contentType("application/json"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void post_state_test() throws Exception {
@@ -289,20 +328,24 @@ class CwbshopApplicationTests {
 
     @Test
     void get_state_by_id_test() throws Exception {
+        State lastState = stateRepository.findFirstByOrderByStateId();
+
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/state/5")
+                .get("/state/{id}", lastState.getStateId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    void delete_state_by_id_test() throws Exception {
-//        mockMvc.perform(delete("/state/2")
-//                .contentType("application/json")
-//                .content(objectMapper.writeValueAsString(state)))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void delete_state_by_id_test() throws Exception {
+        State lastState = stateRepository.findFirstByOrderByStateId();
+
+        mockMvc.perform(delete("/state/{id}", lastState.getStateId())
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(state)))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void post_address_test() throws Exception {
@@ -325,20 +368,23 @@ class CwbshopApplicationTests {
 
     @Test
     void get_address_by_id_test() throws Exception {
+        Address lastAddress = addressRepository.findFirstByOrderByAddressId();
+
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/address/4")
+                .get("/address/{id}", lastAddress.getAddressId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    void delete_address_by_id_test() throws Exception {
-//        mockMvc.perform(delete("/address/2")
-//                .contentType("application/json")
-//                .content(objectMapper.writeValueAsString(address)))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void delete_address_by_id_test() throws Exception {
+        Address lastAddress = addressRepository.findFirstByOrderByAddressId();
+
+        mockMvc.perform(delete("/address/{id}", lastAddress.getAddressId())
+                .contentType("application/json"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     void post_product_denied_test() throws Exception {
@@ -375,22 +421,24 @@ class CwbshopApplicationTests {
 
     @Test
     void get_product_by_id_test() throws Exception {
+        Product lastProduct = productRepository.findFirstByOrderByProductId();
+
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/api/product/3")
+                .get("/api/product/{id}", lastProduct.getProductId())
                 .header("Authorization", "Bearer " + bearerToken)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    void delete_product_by_id_test() throws Exception {
-//        mockMvc.perform(delete("/api/product/2")
-//                .header("Authorization", "Bearer " + bearerToken)
-//                .contentType("application/json")
-//                .content(objectMapper.writeValueAsString(product)))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    void delete_product_by_id_test() throws Exception {
+        Product lastProduct = productRepository.findFirstByOrderByProductId();
+
+        mockMvc.perform(delete("/api/product/{id}", lastProduct.getProductId())
+                .header("Authorization", "Bearer " + bearerToken))
+                .andExpect(status().isOk());
+    }
 
 
 }

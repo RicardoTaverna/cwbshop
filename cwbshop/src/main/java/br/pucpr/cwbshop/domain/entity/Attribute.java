@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * The type Attribute.
@@ -17,7 +16,7 @@ public class Attribute implements Serializable {
 
     @Id
     @GeneratedValue
-    private int attribute_id;
+    private int attributeId;
 
     @Column(name = "id", length = 50)
     private String id;
@@ -26,7 +25,7 @@ public class Attribute implements Serializable {
     private String value_name;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
     @JsonIgnoreProperties("attributes")
     private Product product;
 
@@ -35,8 +34,8 @@ public class Attribute implements Serializable {
      *
      * @return the attribute id
      */
-    public int getAttribute_id() {
-        return attribute_id;
+    public int getAttributeId() {
+        return attributeId;
     }
 
     /**
@@ -44,8 +43,8 @@ public class Attribute implements Serializable {
      *
      * @param attribute_id the attribute id
      */
-    public void setAttribute_id(int attribute_id) {
-        this.attribute_id = attribute_id;
+    public void setAttributeId(int attribute_id) {
+        this.attributeId = attribute_id;
     }
 
     /**

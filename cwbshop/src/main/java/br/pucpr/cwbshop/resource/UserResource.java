@@ -3,6 +3,8 @@ package br.pucpr.cwbshop.resource;
 
 import br.pucpr.cwbshop.domain.entity.User;
 import br.pucpr.cwbshop.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api")
+@Api(value = "/api", tags = "User", description = "User")
 public class UserResource {
 
     @Autowired
@@ -26,6 +29,7 @@ public class UserResource {
      * @return the users
      */
     @GetMapping("/user")
+    @ApiOperation(value = "Retorna uma lista de Usuarios")
     public List<User> getUsers() {
         return userService.findAll();
     }
@@ -37,6 +41,7 @@ public class UserResource {
      * @return the response entity
      */
     @PostMapping("/user")
+    @ApiOperation(value = "Cria um Usuario")
     public ResponseEntity<User>
     save(@Valid @RequestBody User user) {
         userService.save(user);
@@ -51,6 +56,7 @@ public class UserResource {
      * @return the response entity
      */
     @PutMapping("/user")
+    @ApiOperation(value = "Atualiza um Usuario")
     public ResponseEntity update(@Valid @RequestBody User user) {
         userService.save(user);
         return ResponseEntity.ok().body(user);
@@ -64,6 +70,7 @@ public class UserResource {
      * @return the response entity
      */
     @DeleteMapping("/user")
+    @ApiOperation(value = "Deleta Usuario pelo ID")
     public ResponseEntity<String> delete(@Valid @RequestBody User user) {
         userService.delete(user);
         return  ResponseEntity.ok().body("User excluded ID: " + user.getId());
@@ -77,6 +84,7 @@ public class UserResource {
      * @return the response entity
      */
     @DeleteMapping("/user/{id}")
+    @ApiOperation(value = "Deleta Usuario pelo ID")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         userService.deleteById(id);
         return ResponseEntity.ok().body("User excluded ID: " + id);

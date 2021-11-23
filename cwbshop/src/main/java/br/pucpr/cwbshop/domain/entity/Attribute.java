@@ -2,6 +2,7 @@ package br.pucpr.cwbshop.domain.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +29,7 @@ public class Attribute implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @JsonIgnoreProperties("attributes")
+    @ApiModelProperty(hidden = true)
     private Product product;
 
     /**

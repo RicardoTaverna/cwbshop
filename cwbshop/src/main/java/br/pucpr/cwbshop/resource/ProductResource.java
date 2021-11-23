@@ -4,6 +4,8 @@ import br.pucpr.cwbshop.domain.entity.Attribute;
 import br.pucpr.cwbshop.domain.entity.Product;
 import br.pucpr.cwbshop.repository.ProductRepository;
 import br.pucpr.cwbshop.service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/product")
+@Api(value = "/api/product", tags = "Product", description = "Product ")
 public class ProductResource {
 
     private final ProductRepository productRepository;
@@ -36,7 +39,9 @@ public class ProductResource {
      * @param id the id
      * @return the product by id
      */
+
     @GetMapping("/{id}")
+    @ApiOperation(value = "Retorna Produto pelo ID")
     public Product get_product_by_id(@PathVariable("id") int id){
         return productRepository.getById(id);
     }
@@ -47,6 +52,7 @@ public class ProductResource {
      * @return the list
      */
     @GetMapping()
+    @ApiOperation(value = "Retorna todos Produtos")
     public List<Product> get_all(){
         return productRepository.findAll();
     }
@@ -58,6 +64,7 @@ public class ProductResource {
      * @return the product
      */
     @PostMapping()
+    @ApiOperation(value = "Cria um Produto")
     public Product add(@RequestBody Product product){
         return productService.save(product);
     }
@@ -69,6 +76,7 @@ public class ProductResource {
      * @return the response entity
      */
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Deleta Produto pelo ID")
     public ResponseEntity delete(@PathVariable("id") int id){
         productRepository.deleteById(id);
         return ResponseEntity.ok().build();
@@ -82,6 +90,7 @@ public class ProductResource {
      * @return the product
      */
     @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza Produto pelo ID")
     public Product update(@RequestBody Product new_product, @PathVariable("id") int id){
         return productRepository.findById(id).map(product -> {
             product.setSite_id(new_product.getSite_id());

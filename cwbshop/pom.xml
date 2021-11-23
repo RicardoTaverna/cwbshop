@@ -16,9 +16,13 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
-        <!-- O endereço que leva à sua instalação do Sonar -->
-        <sonar.coverage.jacoco.xmlReportPaths>../target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.coveage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coveage.jacoco.xmlReportPaths>
+        <sonar.junit.reportsPath>target/surefire-reports/TEST-*.xml</sonar.junit.reportsPath>
+        <sonar.tests>src/test/java</sonar.tests>
     </properties>
     <dependencies>
         <dependency>
@@ -83,12 +87,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->

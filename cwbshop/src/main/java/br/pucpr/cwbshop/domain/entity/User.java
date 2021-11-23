@@ -35,7 +35,7 @@ public class User implements Serializable {
     @NotEmpty
     private String lastName;
 
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date dtCreation;

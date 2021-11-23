@@ -16,10 +16,10 @@ import java.io.Serializable;
 public class City implements Serializable {
     @Id
     @GeneratedValue
-    private int city_id;
+    private int cityId;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     @JsonBackReference
     @ApiModelProperty(hidden = true)
     private Address address;
@@ -35,8 +35,8 @@ public class City implements Serializable {
      *
      * @return the city id
      */
-    public int getCity_id() {
-        return city_id;
+    public int getCityId() {
+        return cityId;
     }
 
     /**
@@ -44,8 +44,8 @@ public class City implements Serializable {
      *
      * @param city_id the city id
      */
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
+    public void setCityId(int city_id) {
+        this.cityId = city_id;
     }
 
     /**

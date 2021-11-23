@@ -32,4 +32,6 @@ public interface UserRepository
     @Query("select u from User u where u.firstName=:name")
     List<User> findByName(@Param("name") String name);
 
+    User findFirstByOrderById();
+
 }

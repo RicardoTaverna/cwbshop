@@ -3,9 +3,7 @@ package br.pucpr.cwbshop.resource;
 import br.pucpr.cwbshop.domain.entity.Address;
 import br.pucpr.cwbshop.repository.AddressRepository;
 import br.pucpr.cwbshop.service.AddressService;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/address")
+@Api(value = "/address", tags = "Address", description = "Product Address")
 public class AddressResource {
 
     private final AddressRepository addressRepository;
@@ -39,6 +38,7 @@ public class AddressResource {
      * @return the attribute by id
      */
     @GetMapping("/{id}")
+    @ApiOperation(value = "Retorna Address pelo ID")
     public Address get_attribute_by_id(@PathVariable("id") int id){
         return addressRepository.getById(id);
     }
@@ -49,6 +49,7 @@ public class AddressResource {
      * @return the list
      */
     @GetMapping()
+    @ApiOperation(value = "Retorna todos Address")
     public List<Address> get_all(){
         return addressRepository.findAll();
     }
@@ -60,6 +61,7 @@ public class AddressResource {
      * @return the address
      */
     @PostMapping()
+    @ApiOperation(value = "Cria Address")
     public Address add(@RequestBody Address address){
         return addressService.save(address);
     }
@@ -71,6 +73,7 @@ public class AddressResource {
      * @return the response entity
      */
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Deleta Address pelo ID")
     public ResponseEntity delete(@PathVariable("id") int id){
         addressRepository.deleteById(id);
         return ResponseEntity.ok().build();

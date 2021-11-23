@@ -35,6 +35,7 @@ public class Address implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @JsonBackReference
+    @ApiModelProperty(hidden = true)
     private Product product;
 
     @Column(name = "id", length = 100)

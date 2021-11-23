@@ -3,6 +3,8 @@ package br.pucpr.cwbshop.resource;
 import br.pucpr.cwbshop.domain.entity.City;
 import br.pucpr.cwbshop.repository.CityRepository;
 import br.pucpr.cwbshop.service.CityService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/city")
+@Api(value = "/city", tags = "City", description = "Product City")
 public class CityResource {
 
     private final CityRepository cityRepository;
@@ -36,6 +39,7 @@ public class CityResource {
      * @return the attribute by id
      */
     @GetMapping("/{id}")
+    @ApiOperation(value = "Retorna City pelo ID")
     public City get_attribute_by_id(@PathVariable("id") int id){
         return cityRepository.getById(id);
     }
@@ -46,6 +50,7 @@ public class CityResource {
      * @return the list
      */
     @GetMapping()
+    @ApiOperation(value = "Retorna todas City")
     public List<City> get_all(){
         return cityRepository.findAll();
     }
@@ -57,6 +62,7 @@ public class CityResource {
      * @return the city
      */
     @PostMapping()
+    @ApiOperation(value = "Cria City")
     public City add(@RequestBody City city){
         return cityService.save(city);
     }
@@ -68,6 +74,7 @@ public class CityResource {
      * @return the response entity
      */
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Deleta City pelo ID")
     public ResponseEntity delete(@PathVariable("id") int id){
         cityRepository.deleteById(id);
         return ResponseEntity.ok().build();

@@ -63,20 +63,6 @@ public class UserResource {
 
 
     /**
-     * Delete response entity.
-     *
-     * @param user the user
-     * @return the response entity
-     */
-    @DeleteMapping("/user")
-    @ApiOperation(value = "Deleta Usuario pelo ID")
-    public ResponseEntity<String> delete(@Valid @RequestBody User user) {
-        userService.delete(user);
-        return  ResponseEntity.ok().body("User excluded ID: " + user.getId());
-
-    }
-
-    /**
      * Delete by id response entity.
      *
      * @param id the id

@@ -67,6 +67,27 @@ public class CountryResource {
     }
 
     /**
+     * Update country.
+     *
+     * @param new_country the new country
+     * @param id          the id
+     * @return the country
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza Country pelo ID")
+    public Country update(@RequestBody Country new_country, @PathVariable("id") int id){
+        return countryRepository.findById(id).map(country -> {
+            country.setName(new_country.getName());
+            country.setId(new_country.getId());
+            country.setAddress(new_country.getAddress());
+            return countryService.save(country);
+        }).orElseGet(() -> {
+            new_country.setCountryId(id);
+            return countryService.save(new_country);
+        });
+    }
+
+    /**
      * Delete response entity.
      *
      * @param id the id

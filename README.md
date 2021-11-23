@@ -159,7 +159,7 @@ A documentação no padrão OpenAPI você pode consultar [aqui](http://localhost
 
 #### 🔓 Endpoints sem autenticação
 ```json
-/attribute GET/POST/DELETE
+/attribute GET/POST/PUT/DELETE
 localhost:8060/attribute
 
 {
@@ -168,7 +168,7 @@ localhost:8060/attribute
 }
 ```
 ```json
-/city GET/POST/DELETE
+/city GET/POST/PUT/DELETE
 localhost:8060/city
         
 {
@@ -179,7 +179,7 @@ localhost:8060/city
 ```
 
 ```json
-/country GET/POST/DELETE
+/country GET/POST/PUT/DELETE
 localhost:8060/country
 
 {
@@ -189,7 +189,7 @@ localhost:8060/country
 ```
 
 ```json
-/state GET/POST/DELETE
+/state GET/POST/PUT/DELETE
 localhost:8060/state
 
 {
@@ -199,7 +199,7 @@ localhost:8060/state
 ```
 
 ```json
-/address GET/POST/DELETE
+/address GET/POST/PUT/DELETE
 localhost:8060/address
 
 {
@@ -234,7 +234,7 @@ localhost:8060/login
 Passar como Bearer token o codigo retornado atraves do endpoint /login
 
 ```json
-/user GET/POST
+/user GET/POST/PUT/DELETE
 localhost:8060/api/user
 
 {

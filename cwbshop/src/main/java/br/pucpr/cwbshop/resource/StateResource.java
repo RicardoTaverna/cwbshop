@@ -68,6 +68,27 @@ public class StateResource {
     }
 
     /**
+     * Update state.
+     *
+     * @param new_state the new state
+     * @param id        the id
+     * @return the state
+     */
+    @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza State pelo ID")
+    public State update(@RequestBody State new_state, @PathVariable("id") int id){
+        return stateRepository.findById(id).map(state -> {
+            state.setName(new_state.getName());
+            state.setId(new_state.getId());
+            state.setAddress(new_state.getAddress());
+            return stateService.save(state);
+        }).orElseGet(() -> {
+            new_state.setStateId(id);
+            return stateService.save(new_state);
+        });
+    }
+
+    /**
      * Delete response entity.
      *
      * @param id the id

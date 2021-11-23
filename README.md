@@ -101,7 +101,7 @@ $ git clone https://github.com/RicardoTaverna/cwbshop.git
 ```bash
 
 # Acessar a pasta /cwbshop
-$ cd backend/
+$ cd cwbshop/
 
 # criar uma imagem apartir do Dockerfile
 $ docker build -t cwbshop-api/cwbshop-service:latest . 
@@ -130,6 +130,11 @@ $ docker-compose up
 # o servidor da API iniciará localhost:8060
 ```
 
+- Para baixar a cwbshop direto do docker hub:
+```bash
+# Link docker hub https://hub.docker.com/r/stengrat/cwbshop
+$ docker pull stengrat/cwbshop
+```
 ### 🐛 Testes
 
 - Para executar os testes unitários, acesse e execute pela IDE o arquivo: cwbshop/src/test/java/br/pucpr/cwbshop/CwbshopApplicationTests.java

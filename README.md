@@ -62,12 +62,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
     <img alt="Docker" src="https://img.shields.io/badge/Docker-v20.10-734F3C?style=for-the-badge">
 </a>
 
-- <a href="https://www.mysql.com">
-    <img alt="Mysql" src="https://img.shields.io/badge/MySQL-v8.0.21-734F3C?style=for-the-badge">
-</a>
 
 - <a href="https://cloud.spring.io/spring-cloud-netflix/reference/html/">
-    <img alt="Eureka" src="https://img.shields.io/badge/Eureka-v8.0.21-734F3C?style=for-the-badge">
+    <img alt="Eureka" src="https://img.shields.io/badge/Eureka-v3.0.4-734F3C?style=for-the-badge">
 </a>
 
 
